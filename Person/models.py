@@ -14,10 +14,12 @@ class Person(AbstractUser):
             raise ValidationError("Your CIN must have 8 characters !")
         return v
         # ou bien
+
+        
     cin = models.IntegerField('CIN',primary_key=True,validators=[
-        MaxLengthValidator[8],
-        MinLengthValidator[8],
-        cin_length()
+        MaxLengthValidator(8),
+        MinLengthValidator(8),
+        cin_length
     ])
     
 

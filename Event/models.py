@@ -43,7 +43,7 @@ class Event(models.Model):
     )
 class Event_Participation(models.Model):
     person=models.ForeignKey(Person,on_delete=models.CASCADE)
-    event=models.ForeignKey(Person,on_delete=models.CASCADE)
+    event=models.ForeignKey(Event,on_delete=models.CASCADE)
     participation_date=models.DateField(auto_now=True)
 
     class Meta:
