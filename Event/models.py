@@ -8,6 +8,8 @@ CATEGORY_CHOICES = (
         ('SPORT', 'Sport'),
     )
 class Event(models.Model):
+    def __str__(self):
+        return f'Evenement est {self.title}'
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField()
@@ -19,7 +21,7 @@ class Event(models.Model):
     )
     state = models.BooleanField(default=False)
     nbe_participant = models.IntegerField(default=0)
-    evt_date = models.DateTimeField()
+    event_date = models.DateTimeField()
     class Meta:
         constraints=[
             models.CheckConstraint(
@@ -27,6 +29,8 @@ class Event(models.Model):
             name='Date doit etre sup à date sys'
             )
         ]
+        verbose_name=("Evenement")
+
     creation_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
     organizer=models.ForeignKey(   #elly tgéri el relation
@@ -48,3 +52,6 @@ class Event_Participation(models.Model):
 
     class Meta:
         unique_together=('person','event')
+        
+
+    

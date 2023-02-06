@@ -10,17 +10,18 @@ from django.core.exceptions import ValidationError
 class Person(AbstractUser):
 
     def cin_length(v):
-        if len(v)!=8:
+        if len(str(v))!=8:
             raise ValidationError("Your CIN must have 8 characters !")
         return v
         # ou bien
 
         
     cin = models.IntegerField('CIN',primary_key=True,validators=[
-        MaxLengthValidator(8),
-        MinLengthValidator(8),
         cin_length
     ])
+    class Meta:
+       verbose_name=("Evenement")
+
     
 
     email = models.EmailField()
