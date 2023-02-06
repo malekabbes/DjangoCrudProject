@@ -6,9 +6,7 @@ class ParticipationAdmin(admin.TabularInline):
     model=Event_Participation
     extra=1
 
-@admin.register(Person) 
-class SearchPerson(admin.ModelAdmin):
- search_fields = ['username']
+
 
 @admin.register(Event) 
 class EventAdmin(admin.ModelAdmin):
