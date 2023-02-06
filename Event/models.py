@@ -52,6 +52,7 @@ class Event_Participation(models.Model):
 
     class Meta:
         unique_together=('person','event')
-        
+        verbose_name=("Person")
+
 
     

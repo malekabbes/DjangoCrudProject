@@ -20,7 +20,7 @@ class Person(AbstractUser):
         cin_length
     ])
     class Meta:
-       verbose_name=("Evenement")
+       verbose_name=("Personne")
 
     
 

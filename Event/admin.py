@@ -1,9 +1,14 @@
 from django.contrib import admin
 from.models import *
 # Register your models here.
+
 class ParticipationAdmin(admin.TabularInline):
     model=Event_Participation
     extra=1
+
+@admin.register(Person) 
+class SearchPerson(admin.ModelAdmin):
+ search_fields = ['username']
 
 @admin.register(Event) 
 class EventAdmin(admin.ModelAdmin):
@@ -35,6 +40,5 @@ class EventAdmin(admin.ModelAdmin):
     ]
     readonly_fields=["creation_date","update_date"]
     inlines=(ParticipationAdmin,)
-@admin.register(Person)
-class SearchPerson(admin.ModelAdmin):
-    search_fields=['username']
+    autocomplete_fields = ['organizer']
+
