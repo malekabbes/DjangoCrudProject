@@ -4,3 +4,5 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse('Hello , This Event Page ! 😄')
+def affiche(request):
+    return render(request,"Event/affiche.html")

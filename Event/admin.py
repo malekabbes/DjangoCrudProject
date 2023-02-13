@@ -67,7 +67,9 @@ class EventAdmin(admin.ModelAdmin):
              message='%s successfully declined' %message)
     set_false.short_description="Decline"
 
-    list_display=('title','description','nbe_participant','state','event_date','update_date','organizer')
+    list_display=('title','description','nbe_participant','state','event_date','update_date','organizer','evt_participation')
+    def evt_participation(self,obj):
+        return obj.participation.count()
 # admin.site.register(Event,EventAdmin)
     list_per_page=2
     list_filter=('title',DateListFilter,ParticipantsFilter)
