@@ -17,6 +17,7 @@ class PersonAdmin(admin.ModelAdmin):
         'email',
         'username',
         'password',
+        'cin'
         
         )
         }),

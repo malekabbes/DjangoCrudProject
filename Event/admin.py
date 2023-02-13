@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin,messages
 from.models import *
 from datetime import datetime
 # Register your models here.
@@ -44,14 +44,34 @@ class ParticipantsFilter(admin.SimpleListFilter):
             return queryset.filter(nbe_participant__gte=10)
         if self.value()=='Pas de participants':
             return queryset.filter(nbe_participant__exact=0)
-        
 
+def set_True(ModelAdmin,request,queryset):
+    req=queryset.update(state=True)
+    if req==1:
+        message="1 event was modified"
+    else:
+        message=f"{req} events were"
+    messages.success(request,
+                   message='%s successfully accepted' %message)
+set_True.short_description="Accept"
 @admin.register(Event) 
 class EventAdmin(admin.ModelAdmin):
+    def set_false(self, request, queryset):
+        req=queryset.filter(state=False)
+        if req.count()>0:
+          messages.error(request,f"{req.count()} events are already marked Refused")
+        else:
+          req_update=queryset.update(state=False)
+          message=f"{req_update} events were"
+        messages.success(request,
+             message='%s successfully declined' %message)
+    set_false.short_description="Decline"
+
     list_display=('title','description','nbe_participant','state','event_date','update_date','organizer')
 # admin.site.register(Event,EventAdmin)
     list_per_page=2
     list_filter=('title',DateListFilter,ParticipantsFilter)
+    actions=[set_True,set_false]
     fieldsets=[
         ('A propos', {
         "fields":(
@@ -71,6 +91,7 @@ class EventAdmin(admin.ModelAdmin):
         ('Personnel',{
         "fields":(
         "organizer",
+        "nbe_participant"
         )
         })
     ]
