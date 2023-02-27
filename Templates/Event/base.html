@@ -6,39 +6,170 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     />
+    <script src="https://unpkg.com/feather-icons"></script>
   </head>
   <style>
-    html,
+    /* Center the title and increase font size */
     body {
+      background: azure;
+    }
+    h1 {
+      text-align: center;
+    }
+    /*Center the form and adjust its width and padding */
+    form {
+      display: flex;
+      flex-direction: column;
+
+      width: 50%;
+      margin: 0 auto;
+      margin-bottom: 3rem;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: #5f9ea026;
+    }
+    .fixed-bottom {
+      position: relative;
+    }
+    /* Style the form inputs */
+    input,
+    select,
+    textarea {
       width: 100%;
-      height: 100%;
-      margin: auto;
-      padding: 0px;
-      color: #333536a3;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    input[type="button"] {
+      background-color: #ca0a0a69;
+      color: white;
+      text-align: center;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 2rem;
+      width: 100%;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.1em 0.2em;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25rem;
+    }
+
+    .badge-primary {
+      color: #fff;
+      background-color: #007bff;
+    }
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+    .alert-success hr {
+      border-top-color: #b1dfbb;
+    }
+    .alert-success .alert-link {
+      color: #0b2e13;
     }
   </style>
+
   <body>
     <div class="container">{% block content %} {% endblock %}</div>
     <script>
-  function _0x118a(){var $=["2135484pOYTBI","4tlsAOZ","3332784qOUqRE","60ykJmYR","write","163888oFnsXa","587114rfLYhP","1660614xniqvi","10MZqJsw","385HoLJyD","5053077xgzaMr","3451290LCmxlV",];return(_0x118a=function(){return $})()}var _0x470911=_0xc6bf;function _0xc6bf($,x){var t=_0x118a();return(_0xc6bf=function($,x){return t[$-=392]})($,x)}(function($,x){for(var t=_0xc6bf,_=$();;)try{if(parseInt(t(399))/1+parseInt(t(394))/2+-parseInt(t(403))/3*(parseInt(t(393))/4)+parseInt(t(400))/5*(parseInt(t(392))/6)+parseInt(t(401))/7*(-parseInt(t(397))/8)+-parseInt(t(402))/9+-parseInt(t(395))/10*(parseInt(t(398))/11)==879977)break;_.push(_.shift())}catch(a){_.push(_.shift())}})(_0x118a,879977),document[_0x470911(396)](unescape("%20%20%3Cfooter%20class%3D%22bg-dark%20text-light%20py-3%20fixed-bottom%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22container%20text-center%22%3E%0A%20%20%20%20%20%20%20%20%3Cp%20class%3D%22m-0%22%3E%0A%20%20%20%20%20%20%20%20%20%20Made%20with%20%3Cspan%20class%3D%22text-danger%22%3E%26hearts%3B%3C/span%3E%20by%20Malek%20Abbes%0A%20%20%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/footer%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js%22%3E%3C/script%3E%0A"));
+      function _0x118a() {
+        var $ = [
+          "2135484pOYTBI",
+          "4tlsAOZ",
+          "3332784qOUqRE",
+          "60ykJmYR",
+          "write",
+          "163888oFnsXa",
+          "587114rfLYhP",
+          "1660614xniqvi",
+          "10MZqJsw",
+          "385HoLJyD",
+          "5053077xgzaMr",
+          "3451290LCmxlV",
+        ];
+        return (_0x118a = function () {
+          return $;
+        })();
+      }
+      var _0x470911 = _0xc6bf;
+      function _0xc6bf($, x) {
+        var t = _0x118a();
+        return (_0xc6bf = function ($, x) {
+          return t[($ -= 392)];
+        })($, x);
+      }
+      (function ($, x) {
+        for (var t = _0xc6bf, _ = $(); ; )
+          try {
+            if (
+              parseInt(t(399)) / 1 +
+                parseInt(t(394)) / 2 +
+                (-parseInt(t(403)) / 3) * (parseInt(t(393)) / 4) +
+                (parseInt(t(400)) / 5) * (parseInt(t(392)) / 6) +
+                (parseInt(t(401)) / 7) * (-parseInt(t(397)) / 8) +
+                -parseInt(t(402)) / 9 +
+                (-parseInt(t(395)) / 10) * (parseInt(t(398)) / 11) ==
+              879977
+            )
+              break;
+            _.push(_.shift());
+          } catch (a) {
+            _.push(_.shift());
+          }
+      })(_0x118a, 879977),
+        document[_0x470911(396)](
+          unescape(
+            "%20%20%3Cfooter%20class%3D%22bg-dark%20text-light%20py-3%20fixed-bottom%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22container%20text-center%22%3E%0A%20%20%20%20%20%20%20%20%3Cp%20class%3D%22m-0%22%3E%0A%20%20%20%20%20%20%20%20%20%20Made%20with%20%3Cspan%20class%3D%22text-danger%22%3E%26hearts%3B%3C/span%3E%20by%20Malek%20Abbes%0A%20%20%20%20%20%20%20%20%3C/p%3E%0A%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%3C/footer%3E%0A%20%20%20%20%3Cscript%20src%3D%22https%3A//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js%22%3E%3C/script%3E%0A"
+          )
+        );
     </script>
 
-<script
-  src="https://code.jquery.com/jquery-3.6.3.min.js"
-  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-  crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script>
+      feather.replace();
+    </script>
   </body>
   <script>
-    
-    $(document).ready(function() {
-      console.log($('.messages'))
-      if ($('.messages').length > 0) {
-        setTimeout(function() {
-          jQuery('.messages').fadeOut('slow');
+    $(document).ready(function () {
+      console.log($(".messages"));
+      if ($(".messages").length > 0) {
+        setTimeout(function () {
+          jQuery(".messages").fadeOut("slow");
         }, 3000);
       }
-      
     });
-    </script>
+  </script>
 </html>

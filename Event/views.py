@@ -1,9 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse,reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from django.contrib.auth.signals import user_logged_out,user_logged_in
+
+
+
 
 from .forms import AddForm
 
@@ -19,7 +24,7 @@ def index(request):
 def affiche(request,classe):
     contexte = {"c":classe}
     return render(request,"Event/affiche.html",contexte)
-# @login_required(login_url="login")
+
 def ListEvt(request):
     evt=Event.objects.all()
     #Affichage via HttpResponse
@@ -28,13 +33,13 @@ def ListEvt(request):
     #Affichage via render() templates
     return render(request,'Event/AfficheEvt.html',{'e':evt})
 #Methode via Generic
-class ListEvtGeneric(ListView,LoginRequiredMixin):
-    model=Event
-    context_object_name='e'
-    #On garde le template par defaut event_list.html
-    #fields="__all__"
-    template_name="Event/AfficheEvt.html"
-    ordering=['-event_date']
+
+class ListEvtGeneric(LoginRequiredMixin, ListView):
+    model = Event
+    context_object_name = 'e'
+    template_name = "Event/AfficheEvt.html"
+    ordering = ['-event_date']
+    
 def Detail(request,title):
     event=Event.objects.get(title=title) #QuerySet get
     return render(request,"Event/Detail.html",{'t':event})
@@ -77,11 +82,32 @@ class DetailGeneric(DetailView):
     context_object_name='t'
     template_name="Event/Detail.html"
 
+# ALERTS
+def show_message_login(sender, user, request, **kwargs):
+    messages.success(request, 'You have logged in.')
+def show_message_logout(sender, user, request, **kwargs):
+    messages.error(request, 'You are logged out')
+def show_message_update(sender, user, request, event_name, **kwargs):
+    message = f"{event_name} has been updated."
+    messages.success(request, message)
+
 class UpdateEvt(UpdateView): 
     model=Event
     form_class=AddForm
     template_name="Event/Update.html"
-    success_url=reverse_lazy("Aff")
+    success_url=reverse_lazy("list")
+    pk_url_kwarg = "pk" 
+    pk_field = "pk" 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"{self.object.title} has been updated")
+        return response
+
+    
+    
+
+user_logged_in.connect(show_message_login)
+user_logged_out.connect(show_message_logout)
 
 
   

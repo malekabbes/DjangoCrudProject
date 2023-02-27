@@ -1,4 +1,5 @@
 {% extends 'Event/base.html' %} {% block content %}
+
 <style>
   .btn-success {
     border-radius: 0.7rem;
@@ -7,7 +8,11 @@
     font-weight: 900;
     margin: 2rem 1rem;
   }
-  .add-evt {
+
+  .fixed-bottom {
+    position: absolute;
+  }
+  .action {
     text-decoration: none;
   }
 </style>
@@ -25,6 +30,9 @@
 {% endif %}
 <a class="add-evt" href="{% url 'Add' %}">
   <button type="button" class="btn btn-success">Ajouter Evenement</button>
+</a>
+<a class="logout" href="{% url 'logout' %}">
+  <button type="button" class="btn btn-danger">Logout</button>
 </a>
 
 <table class="table">
@@ -56,12 +64,17 @@
       <td>{{ event.nbe_participant }}</td>
       <td>{{ event.event_date }}</td>
       <td>
-        <a href="{% url 'D' event.title %}">
-          <button type="button" class="btn btn-info">Details</button>
-        </a>
-        <a href="{% url 'supprimer' event.id %}">
-          <button type="button" class="btn btn-danger">Supprimer</button>
-        </a>
+        <div class="actions">
+          <a class="action" href="{% url 'D' event.title %}">
+            <i data-feather="info"></i>
+          </a>
+          <a class="action" href="{% url 'update' event.id %}">
+            <i data-feather="edit"></i>
+          </a>
+          <a class="action" href="{% url 'supprimer' event.id %}">
+            <i data-feather="trash-2"></i>
+          </a>
+        </div>
       </td>
     </tr>
     {% endfor %}

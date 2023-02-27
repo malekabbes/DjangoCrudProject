@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL="login"
 
 # Application definition
 
@@ -127,3 +126,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL="Person.Person"
 #AUTH_USER_model="nomApp.nomModel"
+LOGIN_URL="/event/login"
+LOGIN_REDIRECT_URL="login"
+LOGOUT_REDIRECT_URL="login?next=/event/list/"
