@@ -34,6 +34,7 @@
       <th>Description</th>
       <th>Category</th>
       <th>State</th>
+      <th>Image</th>
       <th>nbe_participant</th>
       <th>event_date</th>
       <th>Action</th>
@@ -51,6 +52,7 @@
       <td><span class="badge badge-success">En cours</span></td>
 
       {% endif %}
+      <td>{{ event.image }}</td>
       <td>{{ event.nbe_participant }}</td>
       <td>{{ event.event_date }}</td>
       <td>

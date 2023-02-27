@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import AddForm
 
@@ -17,6 +19,7 @@ def index(request):
 def affiche(request,classe):
     contexte = {"c":classe}
     return render(request,"Event/affiche.html",contexte)
+# @login_required(login_url="login")
 def ListEvt(request):
     evt=Event.objects.all()
     #Affichage via HttpResponse
@@ -25,7 +28,7 @@ def ListEvt(request):
     #Affichage via render() templates
     return render(request,'Event/AfficheEvt.html',{'e':evt})
 #Methode via Generic
-class ListEvtGeneric(ListView):
+class ListEvtGeneric(ListView,LoginRequiredMixin):
     model=Event
     context_object_name='e'
     #On garde le template par defaut event_list.html
@@ -33,7 +36,7 @@ class ListEvtGeneric(ListView):
     template_name="Event/AfficheEvt.html"
     ordering=['-event_date']
 def Detail(request,title):
-    event=Event.objects.get(title=title)
+    event=Event.objects.get(title=title) #QuerySet get
     return render(request,"Event/Detail.html",{'t':event})
 
 def AjoutEvt(request):
@@ -41,7 +44,7 @@ def AjoutEvt(request):
         form= AddForm()
         return render(request,'Event/Ajout.html',{'f':form})
     if request.method=="POST":
-        form=AddForm(request.POST)
+        form=AddForm(request.POST,request.FILES)
         if form.is_valid():
             title=form.cleaned_data['title']
             if Event.objects.filter(title=title).exists():
@@ -63,4 +66,23 @@ def SupprimerEvt(request,id):
     evt.delete()
     messages.success(request,"L'événement a été supprimé avec succès !")
     return redirect('list')
+
+class Ajout(CreateView):
+    model=Event
+    form_class= AddForm
+    success_url=reverse_lazy("Aff")
+
+class DetailGeneric(DetailView):
+    model=Event
+    context_object_name='t'
+    template_name="Event/Detail.html"
+
+class UpdateEvt(UpdateView): 
+    model=Event
+    form_class=AddForm
+    template_name="Event/Update.html"
+    success_url=reverse_lazy("Aff")
+
+
+  
 

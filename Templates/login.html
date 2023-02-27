@@ -25,7 +25,7 @@
     position: relative;
   }
   /* Style the form inputs */
-  input[type="text"],
+  input,
   select,
   textarea {
     width: 100%;
@@ -87,23 +87,13 @@
     color: #0b2e13;
   }
 </style>
-<h1>Ajout d'un evenement</h1>
+<form method="post" action="">
+  {% csrf_token %}
+  {{form.username}}
+   {{form.password}}
+   <br>
+  <input type="submit" value="Login" />
 
-<form method="post" action="{% url 'Add' %}" enctype="multipart/form-data">
-  {% if messages %}
-  <div class="messages">
-    {% for message in messages %} {% if message.tags == 'error' %}
-    <div class="alert alert-danger">{{ message }}</div>
-    {% elif message.tags == 'success' %}
-    <div class="alert alert-success">{{ message }}</div>
-    {% else %}
-    <div class="alert alert-info">{{ message }}</div>
-    {% endif %} {% endfor %}
-  </div>
-  {% endif %} {% csrf_token %} {{ f.as_p }}
-  <input type="submit" value="Ajout" />
-  <a href="{% url 'list' %}">
-    <input type="button" value="Retour" />
-  </a>
+</form>
 </form>
 {% endblock %}

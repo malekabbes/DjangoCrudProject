@@ -100,7 +100,7 @@
     <div class="alert alert-info">{{ message }}</div>
     {% endif %} {% endfor %}
   </div>
-  {% endif %} {% csrf_token %} {{ f.as_p }}
+  {% endif %} {% csrf_token %} {{ form.as_p }}
   <input type="submit" value="Ajout" />
   <a href="{% url 'list' %}">
     <input type="button" value="Retour" />

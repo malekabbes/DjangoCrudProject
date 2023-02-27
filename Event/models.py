@@ -10,7 +10,7 @@ CATEGORY_CHOICES = (
 class Event(models.Model):
     def __str__(self):
         return f'Evenement est {self.title}'
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=10)
     description = models.TextField()
     image = models.ImageField()
     
