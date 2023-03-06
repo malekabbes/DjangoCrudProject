@@ -16,5 +16,7 @@ urlpatterns = [
     path('/supprimer/<int:id>/', SupprimerEvt, name='supprimer'),
     path('/login',LoginView.as_view(template_name='login.html'),name="login"),
     path('/logout',LogoutView.as_view(template_name='logout.html'),name="logout"),
+    path('/participate',Participate,name="Participate"),
+    path('/cancel',cancelParticipation,name="Participate"),
 
 ]

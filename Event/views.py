@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.contrib.auth.signals import user_logged_out,user_logged_in
-
+from django.db.models import F
 
 
 
@@ -41,7 +41,9 @@ class ListEvtGeneric(LoginRequiredMixin, ListView):
     ordering = ['-event_date']
     
 def Detail(request,title):
-    event=Event.objects.get(title=title) #QuerySet get
+    event=Event.objects.get(title=title)
+    
+    #QuerySet get
     return render(request,"Event/Detail.html",{'t':event})
 
 def AjoutEvt(request):
@@ -102,12 +104,32 @@ class UpdateEvt(UpdateView):
         response = super().form_valid(form)
         messages.success(self.request, f"{self.object.title} has been updated")
         return response
-
-    
-    
-
 user_logged_in.connect(show_message_login)
 user_logged_out.connect(show_message_logout)
+
+def Participate(request,evt_id):
+    event=Event.objects.get(pk=evt_id)
+    if Event_Participation.objects.filter(
+        participant=request.user,event=event).count()==0:
+        Event_Participation.objects.create(participant=request.user,event=event)
+        event.save()
+        Event.objects.filter(pk=evt_id).update(
+        participants_count=F('participants_count')+1
+    )
+    else:
+        messages.error(request,"Vous participez déjà à cet événement")
+def cancelParticipation(request,id):
+    event=Event.objects.get(pk=id)
+    if Event_Participation.objects.filter(
+        participant=request.user,event=event).count()==1:
+        Event_Participation.objects.filter(participant=request.user,event=event).delete()
+        event.save()
+        Event.objects.filter(pk=id).update(
+        participants_count=F('participants_count')-1
+    )
+    
+
+
 
 
   
