@@ -74,10 +74,12 @@
           <a class="action" href="{% url 'supprimer' event.id %}">
             <i data-feather="trash-2"></i>
           </a>
-          <a class="action" href="{% url 'participate' evt_id=event.id %}">
+          <a class="action" href="{% url 'Participate' evt_id=event.id %}">
             Participate
           </a>
-          <a class="action" href="{% url 'cancel' id=event.id %}"> Cancel </a>
+          <a class="action" href="{% url 'CancelParticipation' id=event.id %}">
+            Cancel
+          </a>
         </div>
       </td>
     </tr>

@@ -7,7 +7,7 @@ CATEGORY_CHOICES = (
         ('CINEMA', 'Cinema'),
         ('SPORT', 'Sport'),
     )
-class Event(models.Model):
+class Event(models.Model): 
     def __str__(self):
         return f'Evenement est {self.title}'
     title = models.CharField(max_length=10)
